@@ -9,6 +9,8 @@ struct node * create (int value) {
     struct node *newnode;
     newnode = (struct node *) malloc(sizeof(struct node));
     newnode -> data = value;
+    newnode -> left = NULL;
+    newnode -> right = NULL;
     return newnode;
 }
 
@@ -33,7 +35,7 @@ void inorder(struct node* root) {
 
 
 int main() {
-    struct node *newnode, *root;
+    struct node *root;
     int data, input;
     root = NULL;
     printf("Enter how many elements you want to add");
