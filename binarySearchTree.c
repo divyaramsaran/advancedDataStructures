@@ -5,9 +5,22 @@ struct node {
     struct node * left, *right;
 };
 
-srtuct node * insert (struct node * root, value) {
-    return root;
+struct node * create (value) {
+    newnode = (struct node *) malloc(sizeof(struct node));
+    newnode -> data = value;
+    return newnode;
 }
+
+srtuct node * insert (struct node * root, value) {
+    if(root == NULL) {
+        return create(value);
+    } else if(value < root -> data) {
+        root -> left = insert(root -> left, value);
+    } else if(value > root -> data) {
+        root -> right = value;
+    }
+    return root;
+}   
 
 
 int main() {
@@ -23,5 +36,4 @@ int main() {
         root = insert(root, data);
     }
 
-    newnode = (struct node *) malloc(sizeof(struct node));
 }
