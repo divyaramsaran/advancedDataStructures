@@ -14,37 +14,50 @@ int height(struct node *node) {
     return node->height;
 }
 
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
 struct node *create (struct node *root, int value) {
-    struct node *newNode;
-    if(root == NULL) {
-        newNode = (struct node *) malloc (sizeof(struct node));
-        root = newNode;
-        root -> left = NULL;
-        root -> right = NULL; 
-        root -> data = value;
-        root -> height = 1;
+    if (root == NULL) {
+        struct node *newNode = (struct node *) malloc(sizeof(struct node));
+        newNode->data = value;
+        newNode->left = NULL;
+        newNode->right = NULL;
+        newNode->height = 1;
+        return newNode;
     }
-    else if(value < root -> data) {
-        root -> left = create (root -> left, value);
+    if (value < root->data) {
+        root->left = create(root->left, value);
+    } else if (value > root->data) {
+        root->right = create(root->right, value);
     }
-    else if(value > root -> data) {
-        root -> right = create (root -> right, value);
-    }
+    
     return root;
+}
+
+void displayTree (struct node *root) {
+    if (root == NULL) {
+        return;
+    }
+    displayTree(root->left);
+    printf("%d ", root->data);
+    displayTree(root->right);
 }
 
 int main() {
     struct node *root = NULL;
     int elements;
-    printf("Enter how many elements you want to add");
+    printf("Enter how many elements you want to add: ");
     scanf("%d", &elements);
 
-    printf("Enter node value: ");
     for(int i = 0; i < elements; i++) {
+        printf("Enter node value: ");
         int value;
         scanf("%d", &value);
         root = create(root, value);
     }
+    displayTree(root);
 
     return 0;
 }
