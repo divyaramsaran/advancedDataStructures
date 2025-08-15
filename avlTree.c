@@ -7,6 +7,16 @@ struct node {
     int height;
 };
 
+int balanceFactor = (struct node * node) {
+    if(node == NULL) {
+        reutrn 0;
+    }
+
+    return (node -> left -> height) - (node -> right -> height);
+}
+
+struct node * leftRotation (struct node * node) {}
+
 int height(struct node *node) {
     if(node == NULL) {
         return 0;
