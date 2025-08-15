@@ -14,6 +14,10 @@ int height(struct node *node) {
     return node->height;
 }
 
+int max (int a, int b) {
+    return a>b ? a : b;
+}
+
 int balanceFactor = (struct node * node) {
     if(node == NULL) {
         reutrn 0;
@@ -27,13 +31,26 @@ struct node * rightRotation (struct node * node) {
     struct node * t2 = x -> right;
 
     x -> right = node;
-    y -> left = t2;
+    node -> left = t2;
 
-    y -> height = max(height (y -> left), height (y -> right)) + 1;
+    node -> height = max(height (node -> left), height (node -> right)) + 1;
     x -> height = max(height(x -> left), height (x -> right)) + 1;
+
+    return x;
 }
 
+struct node * leftRotation(struct node * node) {
+    struct node * y = node -> right;
+    struct node * t2 = y -> left;
 
+    y -> left = node;
+    node -> right = t2;
+
+    node -> height = max (height(node -> left), height(node -> right));
+    y -> height = max (height(y -> left), height(y -> right));
+
+    return y;
+}
 
 int max(int a, int b) {
     return (a > b) ? a : b;
