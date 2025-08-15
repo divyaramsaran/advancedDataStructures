@@ -18,9 +18,9 @@ int max (int a, int b) {
     return a>b ? a : b;
 }
 
-int balanceFactor = (struct node * node) {
+int balanceFactor (struct node *node) {
     if(node == NULL) {
-        reutrn 0;
+        return 0;
     }
 
     return height(node -> left) - height(node -> right);
@@ -52,10 +52,6 @@ struct node * leftRotation(struct node * node) {
     return y;
 }
 
-int max(int a, int b) {
-    return (a > b) ? a : b;
-}
-
 struct node *create (struct node *root, int value) {
     if (root == NULL) {
         struct node *newNode = (struct node *) malloc(sizeof(struct node));
@@ -71,25 +67,25 @@ struct node *create (struct node *root, int value) {
         root->right = create(root->right, value);
     }
 
-    node -> height = max(height(node -> left), height(node -> right)) + 1;
-    int balance = balanceFactor(node);
+    root -> height = max(height(root -> left), height(root -> right)) + 1;
+    int balance = balanceFactor(root);
 
-    if(balance > 1 && value < node -> left) {
-        return leftRotation(node);
+    if(balance > 1 && value < root -> left -> data) {
+        return leftRotation(root);
     }
 
-    if(balance < -1 && value > node -> right) {
-        return rightRotation(node);
+    if(balance < -1 && value > root -> right -> data) {
+        return rightRotation(root);
     }
 
-    if(balance > 1 && value > node -> left) {
-        node = leftRotation(node -> left);
-        return rightRotation(node);
+    if(balance > 1 && value > root -> left -> data) {
+        root = leftRotation(root -> left);
+        return rightRotation(root);
     }
-    
-    if(balance < -1 && value < node -> right) {
-        node = rightRotation(node -> right);
-        return leftRotation(node);
+
+    if(balance < -1 && value < root -> right -> data) {
+        root = rightRotation(root -> right);
+        return leftRotation(root);
     }
     
     return root;
