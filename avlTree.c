@@ -70,6 +70,27 @@ struct node *create (struct node *root, int value) {
     } else if (value > root->data) {
         root->right = create(root->right, value);
     }
+
+    node -> height = max(height(node -> left), height(node -> right)) + 1;
+    int balance = balanceFactor(node);
+
+    if(balance > 1 && value < node -> left) {
+        return leftRotation(node);
+    }
+
+    if(balance < -1 && value > node -> right) {
+        return rightRotation(node);
+    }
+
+    if(balance > 1 && value > node -> left) {
+        node = leftRotation(node -> left);
+        return rightRotation(node);
+    }
+    
+    if(balance < -1 && value < node -> right) {
+        node = rightRotation(node -> right);
+        return leftRotation(node);
+    }
     
     return root;
 }
